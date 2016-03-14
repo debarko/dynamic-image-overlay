@@ -1,3 +1,7 @@
+if (process.argv.length <= 2) {
+    console.log(chalk.red("Resize required."));
+    process.exit(-1);
+}
 var watermark = require('image-watermark');
 var http = require('http');
 var router = require('./router');
@@ -5,13 +9,14 @@ var url = require('url');
 var fs = require('fs');
 var request = require('request');
 var crypto = require('crypto');
+var resize = process.argv[2];
 
 function magick(fileName, text,  res) {
     watermark.embedWatermarkWithCb(fileName, {
         'text': text || 'sample watermark',
         'color' : 'rgb(255, 255, 255)',
         'override-image' : 'true',
-        'resize' : '200%',
+        'resize' : resize,
         'align': 'ltr'
     }, function(err) {
         if (!err) {
