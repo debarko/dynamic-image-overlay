@@ -9,8 +9,9 @@ var crypto = require('crypto');
 function magick(fileName, text,  res) {
     watermark.embedWatermarkWithCb(fileName, {
         'text': text || 'sample watermark',
-        'color' : 'rgb(0, 0, 0)',
+        'color' : 'rgb(255, 255, 255)',
         'override-image' : 'true',
+        'resize' : '200%',
         'align': 'ltr'
     }, function(err) {
         if (!err) {
